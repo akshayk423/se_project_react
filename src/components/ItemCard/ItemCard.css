@@ -1,0 +1,31 @@
+.card {
+  width: 328px;
+  height: 328px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card__image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.card__name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 1;
+  margin: 15px auto auto;
+  text-align: center;
+}

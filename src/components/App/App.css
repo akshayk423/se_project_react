@@ -1,0 +1,9 @@
+.page {
+  background: #f3f3f3;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+}
+
+.page__content {
+  width: 1360px;
+  margin: 0 auto;
+}
