@@ -1,18 +1,52 @@
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import ItemModal from "../ItemModel/ItemModal.jsx";
+import { fetchWeatherData, filterWeatherData } from "../../utils/weatherApi.js";
+import { defaultClothingItems } from "../../utils/defaultClothing.js";
+
+const defaultWeather = { temp: 78, type: "hot", city: "New York City" };
 
 function App() {
-  const [weatherData, setWeatherData] = useState({ temp: 75, type: "hot" });
-  const [activeModal, setActiveModal] = useState("preview");
+  const [weatherData, setWeatherData] = useState(defaultWeather);
+  const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [currLocation, setCurrLocation] = useState({
+    latitude: 99999,
+    longitude: 99999,
+  });
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
-  const handleAddGarmet = () => {
-    setActiveModal("add-garmet");
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setCurrLocation({
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        });
+      },
+      (err) => {
+        console.warn("Geolocation error:", err);
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    if (currLocation.longitude != 99999 && currLocation.latitude != 99999) {
+      fetchWeatherData(currLocation)
+        .then((data) => {
+          const filteredData = filterWeatherData(data);
+          setWeatherData(filteredData);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [currLocation]);
+
+  const handleAddGarment = () => {
+    setActiveModal("add-garment");
   };
 
   const closeModal = () => {
@@ -27,17 +61,21 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        <Header handleAddGarmet={handleAddGarmet} />
-        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+        <Header handleAddGarment={handleAddGarment} city={weatherData.city} />
+        <Main
+          weatherData={weatherData}
+          handleCardClick={handleCardClick}
+          defaultClothingItems={clothingItems}
+        />
         <Footer />
       </div>
       <ModalWithForm
-        title="New Garmet"
-        buttonText="Add Garmet"
+        title="New Garment"
+        buttonText="Add Garment"
         activeModal={activeModal}
         onClose={closeModal}
-        name={"add-garmet"}
-        isOpen={activeModal == "add-garmet"}
+        name={"add-garment"}
+        isOpen={activeModal == "add-garment"}
       >
         <label htmlFor="clothing-name-input" className="modal__label">
           Name

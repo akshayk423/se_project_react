@@ -1,13 +1,16 @@
 import WeatherCard from "../WeatherCard/WeatherCard.jsx";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 import "./Main.css";
-import { defaultClothingItems } from "../../utils/defaultClothing.js";
 
-function Main({ weatherData, handleCardClick }) {
+function Main({ weatherData, handleCardClick, defaultClothingItems }) {
   return (
     <>
       <main>
-        <WeatherCard temp={weatherData.temp} />
+        <WeatherCard
+          temp={weatherData.temp}
+          isDay={weatherData.isDay}
+          condition={weatherData.condition}
+        />
         <section className="cards">
           <p className="cards__text">
             Today is {weatherData.temp}&deg; F / You may want to wear:

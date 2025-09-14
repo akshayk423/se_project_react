@@ -6,15 +6,17 @@ const currentDate = new Date().toLocaleString("default", {
   day: "numeric",
 });
 
-function Header({ handleAddGarmet }) {
+function Header({ handleAddGarment, city }) {
   return (
     <header className="header">
       <p className="header__logo">wtwr°</p>
-      <p className="header__date-and-location">{currentDate}, New York</p>
+      <p className="header__date-and-location">
+        {currentDate}, {city}
+      </p>
       <button
         type="button"
         className="header__add-clothes-btn"
-        onClick={handleAddGarmet}
+        onClick={handleAddGarment}
       >
         + Add Clothes
       </button>
