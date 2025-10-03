@@ -1,7 +1,11 @@
 import "./WeatherCard.css";
 import { weatherCardURLs } from "../../utils/weatherCardURLs";
+import CurrentTemperaturUnitContext from "../../contexts/CurrentTemperaturUnitContext";
+import { useContext } from "react";
 
 function WeatherCard({ temp, isDay, condition }) {
+  const currentTempContext = useContext(CurrentTemperaturUnitContext);
+
   const cards = weatherCardURLs.find((item) => item.category === condition);
 
   const time = isDay ? "day" : "night";
@@ -10,7 +14,11 @@ function WeatherCard({ temp, isDay, condition }) {
 
   return (
     <section className="weather-card">
-      <p className="weather-card__temp">{temp}&deg;F</p>
+      <p className="weather-card__temp">
+        {currentTempContext.currentTemperatureUnit === "F"
+          ? `${temp.f} °F`
+          : `${temp.c} °C`}
+      </p>
       <img
         src={src}
         alt={`${isDay ? "" : "night-"}${condition}`}

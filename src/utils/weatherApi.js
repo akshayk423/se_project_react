@@ -17,7 +17,9 @@ export const filterWeatherData = (data) => {
   const weatherData = {};
 
   weatherData.city = data.name;
-  weatherData.temp = Math.floor(data.main.temp);
+  weatherData.temp = {};
+  weatherData.temp.f = Math.floor(data.main.temp);
+  weatherData.temp.c = Math.round(((data.main.temp - 32) * 5) / 9);
   weatherData.type = getWeatherType(weatherData.temp);
   weatherData.condition = getCondition(data.weather[0].id);
   weatherData.isDay = isDay(data.sys, Date.now());
