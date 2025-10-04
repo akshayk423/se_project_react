@@ -8,6 +8,8 @@ import ItemModal from "../ItemModel/ItemModal.jsx";
 import { fetchWeatherData, filterWeatherData } from "../../utils/weatherApi.js";
 import { defaultClothingItems } from "../../utils/defaultClothing.js";
 import CurrentTemperaturUnitContext from "../../contexts/CurrentTemperaturUnitContext.js";
+import { Routes, Route } from "react-router-dom";
+import PageNotFound from "../PageNotFound/PageNotFounder.jsx";
 
 const defaultWeather = {
   temp: { f: 78, c: Math.round((78 - 32) * (5 / 9)) },
@@ -77,11 +79,23 @@ function App() {
       >
         <div className="page__content">
           <Header handleAddGarment={handleAddGarment} city={weatherData.city} />
-          <Main
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            defaultClothingItems={clothingItems}
-          />
+          <Routes>
+            <Route
+              path={`/`}
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  defaultClothingItems={clothingItems}
+                />
+              }
+            />
+
+            <Route path={`*`} element={<PageNotFound />} />
+
+            <Route path={`/profile`} />
+          </Routes>
+
           <Footer />
         </div>
         <ModalWithForm
@@ -157,6 +171,9 @@ function App() {
           isOpen={activeModal == "preview"}
         />
       </CurrentTemperaturUnitContext.Provider>
+      <Routes>
+        <Route></Route>
+      </Routes>
     </div>
   );
 }
