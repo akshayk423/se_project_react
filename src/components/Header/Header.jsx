@@ -8,6 +8,8 @@ const currentDate = new Date().toLocaleString("default", {
   day: "numeric",
 });
 
+const username = "Terrence Tegegne";
+
 function Header({ handleAddGarment, city }) {
   return (
     <header className="header">
@@ -27,7 +29,7 @@ function Header({ handleAddGarment, city }) {
       </div>
 
       <div className="header__user-container">
-        <p className="header__username">Terrence Tegegne</p>
+        <p className="header__username">{username}</p>
         <img src={avatar} alt="user avatar" className="header__avatar" />
       </div>
     </header>

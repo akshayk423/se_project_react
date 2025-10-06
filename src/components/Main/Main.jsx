@@ -3,9 +3,11 @@ import ItemCard from "../ItemCard/ItemCard.jsx";
 import "./Main.css";
 import CurrentTemperaturUnitContext from "../../contexts/CurrentTemperaturUnitContext.js";
 import { useContext } from "react";
+import clothingItemCards from "../../contexts/ClothingCardsContext.js";
 
-function Main({ weatherData, handleCardClick, defaultClothingItems }) {
+function Main({ weatherData }) {
   const currentTempContext = useContext(CurrentTemperaturUnitContext);
+  const clothingItemsContext = useContext(clothingItemCards);
 
   return (
     <>
@@ -23,9 +25,8 @@ function Main({ weatherData, handleCardClick, defaultClothingItems }) {
               : `${weatherData.temp.c} °C`}{" "}
             / You may want to wear:
           </p>
-          {/* Add TODO cards*/}
           <ul className="cards__list">
-            {defaultClothingItems
+            {clothingItemsContext.clothingItems
               .filter((item) => item.weather === weatherData.type)
               .map((item) => {
                 return (
@@ -34,7 +35,7 @@ function Main({ weatherData, handleCardClick, defaultClothingItems }) {
                     name={item.name}
                     link={item.link}
                     weather={item.weather}
-                    onCardClick={handleCardClick}
+                    onCardClick={clothingItemsContext.handleCardClick}
                   />
                 );
               })}
