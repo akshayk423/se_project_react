@@ -13,6 +13,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import clothingItemCards from "../../contexts/ClothingCardsContext.js";
 import WeatherDataContext from "../../contexts/WeatherDataContext.js";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal.jsx";
 
 const defaultWeather = {
   temp: { f: 78, c: Math.round((78 - 32) * (5 / 9)) },
@@ -69,6 +70,10 @@ function App() {
     setSelectedCard(card);
   };
 
+  const handleDeleteClick = () => {
+    setActiveModal("delete-item");
+  };
+
   const handleTemperatureUnitToggle = () => {
     currentTemperatureUnit === "F"
       ? setCurrentTemperatureUnit("C")
@@ -116,6 +121,13 @@ function App() {
               card={selectedCard}
               onClose={closeModal}
               isOpen={activeModal == "preview"}
+              handleDeleteClick={handleDeleteClick}
+            />
+
+            <ConfirmationModal
+              activeModal={activeModal}
+              onClose={closeModal}
+              isOpen={activeModal == "delete-item"}
             />
           </CurrentTemperaturUnitContext.Provider>
         </clothingItemCards.Provider>

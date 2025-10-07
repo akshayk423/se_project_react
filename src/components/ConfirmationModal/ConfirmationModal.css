@@ -1,0 +1,45 @@
+@import url(../ModalWithForm/ModalWithForm.css);
+
+.modal__content_type_confirmation {
+  padding: 60px 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal__prompt {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0;
+}
+
+.modal__confirm-btn {
+  border: none;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 40px;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+  color: rgba(255, 77, 0, 1);
+}
+
+.modal__confirm-btn:hover {
+  background: #f3f3f3;
+  color: rgba(255, 77, 0, 0.6);
+}
+
+.modal__cancel-btn {
+  border: none;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 24px;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 1);
+}
+
+.modal__cancel-btn:hover {
+  background: #f3f3f3;
+  color: rgba(0, 0, 0, 0.6);
+}

@@ -1,1 +1,43 @@
 @import url(../ModalWithForm/ModalWithForm.css);
+
+.modal__footer {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  padding: 20px 32px 32px;
+}
+
+.modal__garment-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal__caption {
+  margin: 0;
+}
+
+.modal__weather {
+  margin: 0;
+}
+
+.modal__delete-btn {
+  border: none;
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0 20px 0 auto;
+  transition: opacity 0.3s ease-in-out;
+  cursor: pointer;
+  color: rgba(255, 77, 0, 1);
+  width: fit-content;
+  height: fit-content;
+}
+
+.modal__delete-btn:hover {
+  background: white;
+  opacity: 0.6;
+}
+
+.modal__image {
+  border-radius: 20px;
+}
