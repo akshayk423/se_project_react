@@ -9,6 +9,7 @@ function ModalWithForm({
   onClose,
   isOpen,
   name,
+  isValid,
 }) {
   const handleCloseEscape = (evt) => {
     if (evt.key === "Escape") {
@@ -45,7 +46,13 @@ function ModalWithForm({
             className="modal__close"
           ></button>
           {children}
-          <button type="submit" className="modal__submit">
+          <button
+            type="submit"
+            className={`modal__submit ${
+              !isValid ? "modal__submit_type_disabled" : ""
+            }`}
+            disabled={!isValid}
+          >
             {buttonText}
           </button>
         </form>

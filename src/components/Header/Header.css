@@ -8,6 +8,12 @@
   font-weight: 900;
   font-size: 32px;
   margin-right: 24px;
+  cursor: pointer;
+  transition: all 1s;
+}
+
+.header__logo:hover {
+  opacity: 0.6;
 }
 
 .header__date-and-location {
@@ -30,6 +36,7 @@
   font-size: 20px;
   margin: 0 20px 0 auto;
   transition: color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .header__add-clothes-btn:hover {
@@ -42,11 +49,17 @@
   align-items: center;
   gap: 12px;
   margin-left: 20px;
+  cursor: pointer;
 }
 
 .header__username {
   font-weight: 500;
   font-size: 20px;
+  transition: all 1s;
+}
+
+.header__user-container:hover .header__username {
+  opacity: 0.6;
 }
 
 .header__buttons {

@@ -1,7 +1,13 @@
 .sidebar__profile {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 10px;
   align-items: center;
+}
+
+.sidebar__user {
+  display: flex;
+  gap: 16px;
 }
 
 .sidebar__username {
@@ -15,4 +21,20 @@
   width: 56px;
   height: 56px;
   margin-left: 12px;
+}
+
+.sidebar__back-home-btn {
+  border: none;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+  color: rgba(0, 0, 0, 0.6);
+  border: none;
+  width: fit-content;
+}
+
+.sidebar__back-home-btn:hover {
+  background: #f3f3f3;
+  color: rgba(0, 0, 0, 0.9);
 }

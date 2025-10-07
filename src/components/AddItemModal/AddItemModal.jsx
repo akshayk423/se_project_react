@@ -1,6 +1,14 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
 const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
+  const { values, handleChange, setValues, errors, isValid } =
+    useFormWithValidation({
+      name: "",
+      weather: "",
+      link: "",
+    });
+
   return (
     <ModalWithForm
       title={"New Garment"}
@@ -9,6 +17,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       onSubmit={onAddItem}
       isOpen={isOpen}
       buttonText={"Add Garment"}
+      isValid={isValid}
     >
       <label htmlFor="clothing-name-input" className="modal__label">
         Name
@@ -17,21 +26,63 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           type="text"
           className="modal__input"
           placeholder="Name"
+          name="name"
+          value={values.name}
+          onChange={handleChange}
+          minLength={2}
+          maxLength={30}
+          required
         />
+        <span
+          className={`modal__error ${
+            errors.name ? "modal__error_visible" : ""
+          }`}
+          id="name-error"
+        >
+          {errors.name}
+        </span>
       </label>
       <label htmlFor="clothing-image-url-input" className="modal__label">
         Image
-        <input type="url" className="modal__input" placeholder="Image" />
+        <input
+          id="clothing-image-url-input"
+          type="url"
+          className="modal__input"
+          placeholder="Image"
+          name="link"
+          value={values.link}
+          onChange={handleChange}
+          required
+        />
+        <span
+          className={`modal__error ${
+            errors.link ? "modal__error_visible" : ""
+          }`}
+          id="url-error"
+        >
+          {errors.link}
+        </span>
       </label>
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select Weather Type:</legend>
+        <span
+          className={`modal__error ${
+            errors.weather ? "modal__error_visible" : ""
+          }`}
+          id="weather-error"
+        >
+          {errors.weather}
+        </span>
         <label htmlFor="hot" className="modal__label modal__label_type_radio">
           <input
             id="hot"
             type="radio"
             value="hot"
             name="weather"
-            className="modal__input modal__input_type_radio"
+            className=" modal__input_type_radio"
+            required
+            checked={values.weather === "hot"}
+            onChange={handleChange}
           />
           <span className="modal__radio-text">Hot</span>
         </label>
@@ -41,7 +92,10 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             type="radio"
             name="weather"
             value="warm"
-            className="modal__input modal__input_type_radio"
+            className=" modal__input_type_radio"
+            checked={values.weather === "warm"}
+            required
+            onChange={handleChange}
           />
           <span className="modal__radio-text">Warm</span>
         </label>
@@ -51,7 +105,10 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             type="radio"
             value="cold"
             name="weather"
-            className="modal__input modal__input_type_radio"
+            className=" modal__input_type_radio"
+            checked={values.weather === "cold"}
+            required
+            onChange={handleChange}
           />
           <span className="modal__radio-text">Cold</span>
         </label>
