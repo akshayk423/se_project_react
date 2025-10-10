@@ -77,12 +77,6 @@
       "name": "T-Shirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
-    },
-    {
-      "name": "Winter Jacket",
-      "imageUrl": "https://www.rei.com/media/935c330b-b1d4-41d5-b3aa-703506e039cc.jpg?size=1500",
-      "weather": "cold",
-      "_id": 17
     }
   ]
 }

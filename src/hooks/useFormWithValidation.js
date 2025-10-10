@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { flushSync } from "react-dom";
 
 export function useFormWithValidation(defaultValues) {
   const [values, setValues] = useState(defaultValues);
@@ -6,31 +7,8 @@ export function useFormWithValidation(defaultValues) {
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    validateAllFields();
+    handleReset();
   }, []); // Empty dependency array = runs once on mount
-
-  const validateAllFields = () => {
-    const newErrors = {};
-    let formIsValid = true;
-
-    Object.keys(values).forEach((fieldname) => {
-      if (fieldname === "name" && values[fieldname].trim() === "") {
-        newErrors[fieldname] = "Name is required";
-        formIsValid = false;
-      }
-      if (fieldname === "imageUrl" && values[fieldname].trim() === "") {
-        newErrors[fieldname] = "Image URL is required";
-        formIsValid = false;
-      }
-      if (fieldname === "weather" && values[fieldname].trim() === "") {
-        newErrors[fieldname] = "Weather type is required";
-        formIsValid = false;
-      }
-    });
-
-    setErrors(newErrors);
-    setIsValid(formIsValid);
-  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -48,8 +26,14 @@ export function useFormWithValidation(defaultValues) {
   };
 
   const handleReset = () => {
+    const defaultErrors = {
+      name: "Name is required",
+      imageUrl: "Image URL is required",
+      weather: "Weather type is required",
+    };
+    setErrors(defaultErrors);
+    setIsValid(false);
     setValues(defaultValues);
-    validateAllFields();
   };
 
   const validateField = (inputElement) => {
