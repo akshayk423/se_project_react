@@ -2,7 +2,7 @@ import "./Header.css";
 import avatar from "../../assets/Avatar.png";
 import "../ToggleSwitch/ToggleSwitch.jsx";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const currentDate = new Date().toLocaleString("default", {
   month: "long",
@@ -15,9 +15,9 @@ function Header({ handleAddGarment, city }) {
   const navigate = useNavigate();
   return (
     <header className="header">
-      <p className="header__logo" onClick={() => navigate("/")}>
+      <Link className="header__logo" to="/">
         wtwr°
-      </p>
+      </Link>
       <p className="header__date-and-location">
         {currentDate}, {city}
       </p>
@@ -32,13 +32,10 @@ function Header({ handleAddGarment, city }) {
         </button>
       </div>
 
-      <div
-        className="header__user-container"
-        onClick={() => navigate("/profile")}
-      >
+      <Link className="header__user-container" to="/profile">
         <p className="header__username">{username}</p>
         <img src={avatar} alt="user avatar" className="header__avatar" />
-      </div>
+      </Link>
     </header>
   );
 }

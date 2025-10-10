@@ -128,22 +128,49 @@ function App() {
             value={{ currentTemperatureUnit, handleTemperatureUnitToggle }}
           >
             <div className="page__content">
-              <Header
-                handleAddGarment={handleAddGarment}
-                city={weatherData.city}
-              />
               <Routes>
                 <Route
                   path={`/`}
-                  element={<Main weatherData={weatherData} />}
+                  element={
+                    <>
+                      <Header
+                        handleAddGarment={handleAddGarment}
+                        city={weatherData.city}
+                      />
+                      <Main weatherData={weatherData} />
+                      <Footer />
+                    </>
+                  }
                 />
 
-                <Route path={`*`} element={<PageNotFound />} />
+                <Route
+                  path={`*`}
+                  element={
+                    <>
+                      <Header
+                        handleAddGarment={handleAddGarment}
+                        city={weatherData.city}
+                      />
+                      <PageNotFound />
+                      <Footer />
+                    </>
+                  }
+                />
 
-                <Route path={`/profile`} element={<Profile />} />
+                <Route
+                  path={`/profile`}
+                  element={
+                    <>
+                      <Header
+                        handleAddGarment={handleAddGarment}
+                        city={weatherData.city}
+                      />
+                      <Profile />
+                      <Footer />
+                    </>
+                  }
+                />
               </Routes>
-
-              <Footer />
             </div>
 
             <AddItemModal
