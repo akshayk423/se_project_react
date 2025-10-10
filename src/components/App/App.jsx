@@ -3,11 +3,11 @@ import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer.jsx";
-import ItemModal from "../ItemModel/ItemModal.jsx";
+import ItemModal from "../ItemModal/ItemModal.jsx";
 import { fetchWeatherData, filterWeatherData } from "../../utils/weatherApi.js";
-import CurrentTemperaturUnitContext from "../../contexts/CurrentTemperaturUnitContext.js";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
 import { Routes, Route } from "react-router-dom";
-import PageNotFound from "../PageNotFound/PageNotFounder.jsx";
+import PageNotFound from "../PageNotFound/PageNotFound.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import clothingItemCards from "../../contexts/ClothingCardsContext.js";
@@ -124,7 +124,7 @@ function App() {
         <clothingItemCards.Provider
           value={{ clothingItems, handleCardClick, handleAddGarment }}
         >
-          <CurrentTemperaturUnitContext.Provider
+          <CurrentTemperatureUnitContext.Provider
             value={{ currentTemperatureUnit, handleTemperatureUnitToggle }}
           >
             <div className="page__content">
@@ -193,7 +193,7 @@ function App() {
               isOpen={activeModal == "delete-item"}
               onDeleteItem={onDeleteItem}
             />
-          </CurrentTemperaturUnitContext.Provider>
+          </CurrentTemperatureUnitContext.Provider>
         </clothingItemCards.Provider>
       </WeatherDataContext.Provider>
     </div>

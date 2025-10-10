@@ -6,10 +6,6 @@ export function useFormWithValidation(defaultValues) {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
-  useEffect(() => {
-    handleReset();
-  }, []); // Empty dependency array = runs once on mount
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 

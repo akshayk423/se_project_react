@@ -1,5 +1,6 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
+import { useEffect } from "react";
 
 const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
   const { values, handleChange, setValues, errors, isValid, handleReset } =
@@ -13,6 +14,12 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
     e.preventDefault();
     onAddItem(values, handleReset);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      handleReset();
+    }
+  }, [isOpen]);
 
   return (
     <ModalWithForm

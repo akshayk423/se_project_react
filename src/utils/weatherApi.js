@@ -1,4 +1,3 @@
-import WeatherCard from "../components/WeatherCard/WeatherCard";
 import { weatherCardURLs } from "./weatherCardURLs";
 
 const APIkey = import.meta.env.VITE_WEATHER_API_KEY;
@@ -20,7 +19,7 @@ export const filterWeatherData = (data) => {
   weatherData.temp = {};
   weatherData.temp.f = Math.floor(data.main.temp);
   weatherData.temp.c = Math.round(((data.main.temp - 32) * 5) / 9);
-  weatherData.type = getWeatherType(weatherData.temp);
+  weatherData.type = getWeatherType(weatherData.temp.f);
   weatherData.condition = getCondition(data.weather[0].id);
   weatherData.isDay = isDay(data.sys, Date.now());
   weatherData.cardURL = getCardURL(weatherData.isDay, weatherData.condition);

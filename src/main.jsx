@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App/App.jsx";
-import PageNotFound from "./components/PageNotFound/PageNotFounder.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 

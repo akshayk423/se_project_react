@@ -1,10 +1,10 @@
 import "./WeatherCard.css";
 import { weatherCardURLs } from "../../utils/weatherCardURLs";
-import CurrentTemperaturUnitContext from "../../contexts/CurrentTemperaturUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import { useContext } from "react";
 
 function WeatherCard({ temp, isDay, condition }) {
-  const currentTempContext = useContext(CurrentTemperaturUnitContext);
+  const currentTempContext = useContext(CurrentTemperatureUnitContext);
 
   const cards = weatherCardURLs.find((item) => item.category === condition);
 
