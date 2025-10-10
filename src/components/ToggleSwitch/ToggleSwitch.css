@@ -4,8 +4,12 @@
   border: 2px solid #7e7e7e;
   border-radius: 20px;
   cursor: pointer;
-
   position: relative;
+  transition: all 1s;
+}
+
+.toggle-switch:hover {
+  border: 2px solid black;
 }
 
 .toggle-switch__checkbox {

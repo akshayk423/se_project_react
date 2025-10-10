@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer.jsx";
 import ItemModal from "../ItemModel/ItemModal.jsx";
 import { fetchWeatherData, filterWeatherData } from "../../utils/weatherApi.js";
-import { defaultClothingItems } from "../../utils/defaultClothing.js";
 import CurrentTemperaturUnitContext from "../../contexts/CurrentTemperaturUnitContext.js";
 import { Routes, Route } from "react-router-dom";
 import PageNotFound from "../PageNotFound/PageNotFounder.jsx";
@@ -14,6 +13,7 @@ import Profile from "../Profile/Profile.jsx";
 import clothingItemCards from "../../contexts/ClothingCardsContext.js";
 import WeatherDataContext from "../../contexts/WeatherDataContext.js";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal.jsx";
+import { getItems, addItem, deleteItem } from "../../utils/api.js";
 
 const defaultWeather = {
   temp: { f: 78, c: Math.round((78 - 32) * (5 / 9)) },
@@ -30,7 +30,7 @@ function App() {
     latitude: 99999,
     longitude: 99999,
   });
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -57,6 +57,12 @@ function App() {
     }
   }, [currLocation]);
 
+  useEffect(() => {
+    getItems()
+      .then((data) => setClothingItems(data))
+      .catch((error) => console.error(error));
+  }, []);
+
   const handleAddGarment = () => {
     setActiveModal("add-garment");
   };
@@ -80,7 +86,37 @@ function App() {
       : setCurrentTemperatureUnit("F");
   };
 
-  const onAddItem = () => {};
+  const closeAllModals = () => {
+    setActiveModal("");
+  };
+
+  const onDeleteItem = () => {
+    deleteItem(selectedCard.cardId)
+      .then((data) => {
+        const updatedClothingItems = clothingItems.filter(
+          (item) => item._id !== selectedCard.cardId
+        );
+        setClothingItems(updatedClothingItems);
+        closeAllModals();
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const onAddItem = (inputValues, resetFunction) => {
+    const newData = {
+      name: inputValues.name,
+      imageUrl: inputValues.imageUrl,
+      weather: inputValues.weather,
+    };
+
+    addItem(newData)
+      .then((data) => {
+        setClothingItems([...clothingItems, data]);
+        closeAllModals();
+        resetFunction();
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="page">
@@ -128,6 +164,7 @@ function App() {
               activeModal={activeModal}
               onClose={closeModal}
               isOpen={activeModal == "delete-item"}
+              onDeleteItem={onDeleteItem}
             />
           </CurrentTemperaturUnitContext.Provider>
         </clothingItemCards.Provider>

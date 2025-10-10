@@ -6,7 +6,6 @@ import WeatherDataContext from "../../contexts/WeatherDataContext.js";
 
 const ClothesSection = () => {
   const clothingItemsContext = useContext(clothingItemCards);
-  const weatherDataContext = useContext(WeatherDataContext);
 
   return (
     <div className="clothes-section">
@@ -22,21 +21,18 @@ const ClothesSection = () => {
 
       <section className="clothes-section__cards">
         <ul className="cards__list">
-          {clothingItemsContext.clothingItems
-            .filter(
-              (item) => item.weather === weatherDataContext.weatherData.type
-            )
-            .map((item) => {
-              return (
-                <ItemCard
-                  key={item._id}
-                  name={item.name}
-                  link={item.link}
-                  weather={item.weather}
-                  onCardClick={clothingItemsContext.handleCardClick}
-                />
-              );
-            })}
+          {clothingItemsContext.clothingItems.map((item) => {
+            return (
+              <ItemCard
+                key={item._id}
+                name={item.name}
+                imageUrl={item.imageUrl}
+                weather={item.weather}
+                cardId={item._id}
+                onCardClick={clothingItemsContext.handleCardClick}
+              />
+            );
+          })}
         </ul>
       </section>
     </div>

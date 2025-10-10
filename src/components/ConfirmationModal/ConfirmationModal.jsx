@@ -1,6 +1,6 @@
 import "./ConfirmationModal.css";
 
-const ConfirmationModal = ({ activeModal, onClose, isOpen }) => {
+const ConfirmationModal = ({ activeModal, onClose, isOpen, onDeleteItem }) => {
   return (
     <div className={`modal ${isOpen ? "modal_is-opened" : ""}`}>
       <div className="modal__content modal__content_type_confirmation">
@@ -13,8 +13,12 @@ const ConfirmationModal = ({ activeModal, onClose, isOpen }) => {
           Are you sure you want to delete this item?
         </p>
         <p className="modal__prompt">This action is irreversible.</p>
-        <button className="modal__confirm-btn">Yes, delete this item</button>
-        <button className="modal__cancel-btn">Cancel</button>
+        <button className="modal__confirm-btn" onClick={onDeleteItem}>
+          Yes, delete this item
+        </button>
+        <button className="modal__cancel-btn" onClick={onClose}>
+          Cancel
+        </button>
       </div>
     </div>
   );

@@ -33,9 +33,10 @@ function Main({ weatherData }) {
                   <ItemCard
                     key={item._id}
                     name={item.name}
-                    link={item.link}
+                    imageUrl={item.imageUrl}
                     weather={item.weather}
                     onCardClick={clothingItemsContext.handleCardClick}
+                    cardId={item._id}
                   />
                 );
               })}

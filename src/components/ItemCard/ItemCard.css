@@ -29,4 +29,8 @@
   z-index: 1;
   margin: 15px auto auto;
   text-align: center;
+  background-color: white;
+  width: fit-content;
+  padding: 0px 5px;
+  border-radius: 4px;
 }

@@ -2,19 +2,24 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
 const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
-  const { values, handleChange, setValues, errors, isValid } =
+  const { values, handleChange, setValues, errors, isValid, handleReset } =
     useFormWithValidation({
       name: "",
       weather: "",
-      link: "",
+      imageUrl: "",
     });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddItem(values, handleReset);
+  };
 
   return (
     <ModalWithForm
       title={"New Garment"}
       name={"add-garment"}
       onClose={onClose}
-      onSubmit={onAddItem}
+      onSubmit={handleSubmit}
       isOpen={isOpen}
       buttonText={"Add Garment"}
       isValid={isValid}
@@ -49,18 +54,18 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           type="url"
           className="modal__input"
           placeholder="Image"
-          name="link"
-          value={values.link}
+          name="imageUrl"
+          value={values.imageUrl}
           onChange={handleChange}
           required
         />
         <span
           className={`modal__error ${
-            errors.link ? "modal__error_visible" : ""
+            errors.imageUrl ? "modal__error_visible" : ""
           }`}
           id="url-error"
         >
-          {errors.link}
+          {errors.imageUrl}
         </span>
       </label>
       <fieldset className="modal__radio-buttons">

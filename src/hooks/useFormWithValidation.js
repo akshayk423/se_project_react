@@ -18,8 +18,8 @@ export function useFormWithValidation(defaultValues) {
         newErrors[fieldname] = "Name is required";
         formIsValid = false;
       }
-      if (fieldname === "link" && values[fieldname].trim() === "") {
-        newErrors[fieldname] = "Image link is required";
+      if (fieldname === "imageUrl" && values[fieldname].trim() === "") {
+        newErrors[fieldname] = "Image URL is required";
         formIsValid = false;
       }
       if (fieldname === "weather" && values[fieldname].trim() === "") {
@@ -47,6 +47,11 @@ export function useFormWithValidation(defaultValues) {
     setIsValid(Object.values(newErrors).every((error) => !error));
   };
 
+  const handleReset = () => {
+    setValues(defaultValues);
+    validateAllFields();
+  };
+
   const validateField = (inputElement) => {
     // Use browser's built-in validation (like your original code!)
     if (!inputElement.validity.valid) {
@@ -55,5 +60,5 @@ export function useFormWithValidation(defaultValues) {
     return "";
   };
 
-  return { values, handleChange, setValues, errors, isValid };
+  return { values, handleChange, setValues, errors, isValid, handleReset };
 }

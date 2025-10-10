@@ -1,13 +1,13 @@
 import "./ItemCard.css";
 
-function ItemCard({ weather, name, link, onCardClick }) {
+function ItemCard({ weather, name, imageUrl, onCardClick, cardId }) {
   const handleCardClick = () => {
-    onCardClick({ name, link, weather });
+    onCardClick({ name, imageUrl, weather, cardId });
   };
   return (
     <div className="card" onClick={handleCardClick}>
       <h2 className="card__name">{name}</h2>
-      <img className="card__image" src={link} alt={name} />
+      <img className="card__image" src={imageUrl} alt={name} />
     </div>
   );
 }
