@@ -1,7 +1,7 @@
 const baseUrl = "http://localhost:3001";
 const headers = { "Content-Type": "application/json" };
 
-const _handleServerResponse = (res) => {
+export const _handleServerResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
 

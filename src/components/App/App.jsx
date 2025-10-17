@@ -86,10 +86,6 @@ function App() {
       : setCurrentTemperatureUnit("F");
   };
 
-  const closeAllModals = () => {
-    setActiveModal("");
-  };
-
   const onDeleteItem = () => {
     deleteItem(selectedCard.cardId)
       .then((data) => {
@@ -97,7 +93,7 @@ function App() {
           (item) => item._id !== selectedCard.cardId
         );
         setClothingItems(updatedClothingItems);
-        closeAllModals();
+        closeModal();
       })
       .catch((error) => console.log(error));
   };
@@ -111,8 +107,8 @@ function App() {
 
     addItem(newData)
       .then((data) => {
-        setClothingItems([...clothingItems, data]);
-        closeAllModals();
+        setClothingItems([data, ...clothingItems]);
+        closeModal();
         resetFunction();
       })
       .catch((error) => console.log(error));

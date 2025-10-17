@@ -1,5 +1,5 @@
-import React from "react";
+import { createContext } from "react";
 
-const clothingItemCards = React.createContext();
+const clothingItemCards = createContext();
 
 export default clothingItemCards;
