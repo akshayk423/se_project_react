@@ -8,7 +8,6 @@ import clothingItemCards from "../../contexts/ClothingCardsContext.js";
 function Main({ weatherData }) {
   const currentTempContext = useContext(CurrentTemperatureUnitContext);
   const clothingItemsContext = useContext(clothingItemCards);
-
   return (
     <>
       <main>
@@ -37,6 +36,8 @@ function Main({ weatherData }) {
                     weather={item.weather}
                     onCardClick={clothingItemsContext.handleCardClick}
                     cardId={item._id}
+                    owner={item.owner}
+                    likes={item.likes}
                   />
                 );
               })}

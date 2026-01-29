@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { flushSync } from "react-dom";
+import { useState } from "react";
 
 export function useFormWithValidation(defaultValues) {
   const [values, setValues] = useState(defaultValues);
@@ -22,14 +21,22 @@ export function useFormWithValidation(defaultValues) {
   };
 
   const handleReset = () => {
-    const defaultErrors = {
-      name: "Name is required",
-      imageUrl: "Image URL is required",
-      weather: "Weather type is required",
-    };
+    var defaultErrors = {};
+    for (const key in defaultValues) {
+      const fieldName = key.charAt(0).toUpperCase() + key.slice(1);
+      defaultErrors[key] = `${fieldName} is required`;
+    }
     setErrors(defaultErrors);
     setIsValid(false);
     setValues(defaultValues);
+  };
+
+  const resetErrors = () => {
+    var defaultErrors = {};
+    for (const key in defaultValues) {
+      defaultErrors[key] = "";
+    }
+    setErrors(defaultErrors);
   };
 
   const validateField = (inputElement) => {
@@ -40,5 +47,13 @@ export function useFormWithValidation(defaultValues) {
     return "";
   };
 
-  return { values, handleChange, setValues, errors, isValid, handleReset };
+  return {
+    values,
+    handleChange,
+    setValues,
+    errors,
+    isValid,
+    handleReset,
+    resetErrors,
+  };
 }

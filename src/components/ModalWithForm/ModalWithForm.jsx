@@ -1,5 +1,5 @@
 import "./ModalWithForm.css";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 
 function ModalWithForm({
   children,
@@ -11,18 +11,27 @@ function ModalWithForm({
   name,
   isValid,
   onSubmit,
+  isAuthForm = false,
+  onSwitchForm,
 }) {
-  const handleCloseEscape = (evt) => {
-    if (evt.key === "Escape") {
-      onClose();
-    }
-  };
+  const handleCloseEscape = useCallback(
+    (evt) => {
+      if (evt.key === "Escape") {
+        onClose();
+      }
+    },
+    [onClose],
+  );
 
-  const handleCloseClick = (evt) => {
-    if (evt.target.classList.contains("modal")) {
-      onClose();
-    }
-  };
+  const handleCloseClick = useCallback(
+    (evt) => {
+      if (evt.target.classList.contains("modal")) {
+        onClose();
+      }
+    },
+    [onClose],
+  );
+
   useEffect(() => {
     if (activeModal !== "") {
       window.addEventListener("click", handleCloseClick);
@@ -32,7 +41,7 @@ function ModalWithForm({
         window.removeEventListener("keydown", handleCloseEscape);
       };
     }
-  }, [activeModal]);
+  }, [activeModal, handleCloseClick, handleCloseEscape]);
 
   return (
     <div
@@ -47,15 +56,26 @@ function ModalWithForm({
             className="modal__close"
           ></button>
           {children}
-          <button
-            type="submit"
-            className={`modal__submit ${
-              !isValid ? "modal__submit_type_disabled" : ""
-            }`}
-            disabled={!isValid}
-          >
-            {buttonText}
-          </button>
+          <div className="modal__submit-container">
+            <button
+              type="submit"
+              className={`modal__submit ${
+                !isValid ? "modal__submit_type_disabled" : ""
+              }`}
+              disabled={!isValid}
+            >
+              {buttonText}
+            </button>
+            {isAuthForm ? (
+              <button
+                type="button"
+                className="modal__switch-auth-form-btn"
+                onClick={onSwitchForm}
+              >
+                {buttonText === "Log In" ? "Or Sign Up" : "Or Log In"}
+              </button>
+            ) : null}
+          </div>
         </form>
       </div>
     </div>
