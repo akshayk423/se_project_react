@@ -6,6 +6,7 @@
   cursor: pointer;
   position: relative;
   transition: all 1s;
+  margin: auto;
 }
 
 .toggle-switch:hover {

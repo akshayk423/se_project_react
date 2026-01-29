@@ -3,7 +3,7 @@ import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 import { useEffect } from "react";
 
 const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
-  const { values, handleChange, setValues, errors, isValid, handleReset } =
+  const { values, handleChange, errors, isValid, handleReset } =
     useFormWithValidation({
       name: "",
       weather: "",

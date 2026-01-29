@@ -1,10 +1,15 @@
-import avatar from "../../assets/Avatar.png";
 import "./Sidebar.css";
-import { useNavigate } from "react-router-dom";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 const Sidebar = () => {
-  const username = "Terrence Tegegne";
-  const navigate = useNavigate();
+  const { currentUser, handleLogOut, handleEditProfile } =
+    useContext(CurrentUserContext);
+
+  const username = currentUser?.name || "Guest";
+  const avatar =
+    currentUser?.avatar ||
+    "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
 
   return (
     <aside className="sidebar">
@@ -16,10 +21,18 @@ const Sidebar = () => {
 
         <button
           type="button"
-          className="sidebar__back-home-btn"
-          onClick={() => navigate("/")}
+          className="sidebar__edit-profile-btn"
+          onClick={handleEditProfile}
         >
-          Back Home
+          Edit Profile
+        </button>
+
+        <button
+          type="button"
+          className="sidebar__logout-btn"
+          onClick={handleLogOut}
+        >
+          Log Out
         </button>
       </div>
     </aside>

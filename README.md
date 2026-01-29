@@ -28,7 +28,7 @@ Currently you are able to navigate to the `/profile` by clicking on the username
 - HTML (Frontend Markup)
 - CSS (Frontend Styling)
 - JavaScript (API & Functionality)
-- json-server (Backend)
+- Express (Backend) \*[Link-to-backend](https://github.com/akshayk423/se_project_express)
 
 ## Project Structure
 
@@ -50,6 +50,12 @@ All other components not listed are subcomponents of these directories:
 
 - `/PageNotFound/PageNotFound.jsx` is the component that gets rendered over the main section of the page as well if the user happens to end up in a random sub URL of the application and will see Page Not Found in the main section of the application. This will be styled better with a navigation button to go back home. But for now, you can go back home by clicking the icon in the header.
 
+- `/ProtectedRoute/ProtectedRoute.jsx` is an authentication wrapper component for Routes that are defined in App.jsx that checks if the route is not anonymous and if the user is not signed in, then it will send the user back to the home page.
+
+- `RegisterModal/RegisterModal.jsx` is the modal component that is the form for registering a user to the application so that they can use those credentials to log in and access features such as liking cards and creating their own.
+
+- `LoginModal/LoginModal.jsx` is the modal component form for logging in the user which will check if the user exists in the database and if the password input matches the hash stored in the database.
+
 ### `/src/contexts/` (React context files)
 
 - `ClothingCardContext.js`: The file that only exports our context for containing all data we may need for clothing cards inside the application, such as the card information themselves (`clothingItems`) as well as our handler functions for handling clothing card clicks and handle add garment `{handleCardClick, handleAddGarment}`.
@@ -58,13 +64,19 @@ All other components not listed are subcomponents of these directories:
 
 - `CurrentTemperatureUnitContext.js`: A key context file that makes the application be able to communicate directly between the header and the `/ToggleSwitch/ToggleSwitch.jsx` component inside the header what to do when the user clicks this switch and what is the current temperature unit being used in the application via the `{ currentTemperatureUnit, handleTemperatureUnitToggle }`
 
+- `CurrentUserContext.js`: Context file for storing neccessary states and functions that handle user authentication and user data.
+
 ### `/utils/` (API Related)
 
-- `api.js`: Contains our `/get`, `/delete`, and `/post` fetch request for our local database that is being persisted on `db.json` via `localhost:3001/items`.
+- `api.js`: Contains our `/get`, `/delete`, and `/post` fetch request for our local database that is ran via [express](). `localhost:3001/items`.
 
 - `weatherCardURLs.js`: contains an export of an array of objects that is used to translate the API's weather data call to be able to render the proper weather card on the UI.
 
-- `weatherApi.js`: contains an API call function to the OpenWeatherMaps API that required the `VITE_WEATHER_API_KEY` env variable in the `.env`file to run. You can create a separate .env file with your own API key from OpenWeatherMap.org for free after creating an account. Another function also filters the data from the GET request from the API to be able to be used properly as a state variable in our App.jsx.
+- `weatherApi.js`: contains an API call function to the OpenWeatherMaps API that required the `VITE_WEATHER_API_KEY` env variable in the `.env`file to run. You can create a separate .env file with your own API key from [OpenWeatherMap.org](https://openweathermap.org/) for free after creating an account.
+
+- `token.js`: handles getting and storing JWT token for user authentication.
+
+- `auth.js` : api calls for handling using authentication and registration.
 
 ### `/hooks` (Custom hooks)
 
@@ -86,7 +98,7 @@ All other components not listed are subcomponents of these directories:
 
 - `vendor.css` : Stylesheet for containing fallback styles incase the user's browser cannot import specified fonts or styles used in the application src code.
 
-Currently the backend is ran locally using `json-server` and uses the `db.json` file to have the application properly persist data, the command: `json-server --watch db.json --id _id --port 3001` must be ran in the git bash terminal in order for the backend of this application to work.
+The backend for this project is in my other repository with the neccessary instructions in the README.md. [Link](https://github.com/akshayk423/se_project_express)
 
 ## Potential Updates
 

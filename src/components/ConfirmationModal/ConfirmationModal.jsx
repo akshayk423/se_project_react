@@ -1,6 +1,6 @@
 import "./ConfirmationModal.css";
 
-const ConfirmationModal = ({ activeModal, onClose, isOpen, onDeleteItem }) => {
+const ConfirmationModal = ({ onClose, isOpen, onDeleteItem }) => {
   return (
     <div className={`modal ${isOpen ? "modal_is-opened" : ""}`}>
       <div className="modal__content modal__content_type_confirmation">

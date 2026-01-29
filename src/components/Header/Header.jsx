@@ -1,17 +1,17 @@
 import "./Header.css";
-import avatar from "../../assets/Avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../../contexts/CurrentUserContext.js";
 
 const currentDate = new Date().toLocaleString("default", {
   month: "long",
   day: "numeric",
 });
 
-const username = "Terrence Tegegne";
+function Header({ handleAddGarment, city, openLoginModal, openRegisterModal }) {
+  const { isLoggedIn, currentUser } = useContext(AuthContext);
 
-function Header({ handleAddGarment, city }) {
-  const navigate = useNavigate();
   return (
     <header className="header">
       <Link className="header__logo" to="/">
@@ -20,21 +20,47 @@ function Header({ handleAddGarment, city }) {
       <p className="header__date-and-location">
         {currentDate}, {city}
       </p>
+
       <div className="header__buttons">
         <ToggleSwitch />
-        <button
-          type="button"
-          className="header__add-clothes-btn"
-          onClick={handleAddGarment}
-        >
-          + Add Clothes
-        </button>
-      </div>
 
-      <Link className="header__user-container" to="/profile">
-        <p className="header__username">{username}</p>
-        <img src={avatar} alt="user avatar" className="header__avatar" />
-      </Link>
+        {isLoggedIn ? (
+          <>
+            <button
+              type="button"
+              className="header__add-clothes-btn"
+              onClick={handleAddGarment}
+            >
+              + Add Clothes
+            </button>
+            <Link className="header__user-container" to="/profile">
+              <p className="header__username">{currentUser?.name}</p>
+              <img
+                src={currentUser?.avatar}
+                alt="user avatar"
+                className="header__avatar"
+              />
+            </Link>{" "}
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              className="header__register-btn"
+              onClick={openRegisterModal}
+            >
+              Sign Up
+            </button>
+            <button
+              type="button"
+              className="header__login-btn"
+              onClick={openLoginModal}
+            >
+              Log In
+            </button>
+          </>
+        )}
+      </div>
     </header>
   );
 }

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .sidebar__user {
@@ -21,9 +21,11 @@
   width: 56px;
   height: 56px;
   margin-left: 12px;
+  border: 1px solid #00000080;
+  border-radius: 50%;
 }
 
-.sidebar__back-home-btn {
+.sidebar__edit-profile-btn {
   border: none;
   font-weight: 500;
   font-size: 20px;
@@ -34,7 +36,24 @@
   width: fit-content;
 }
 
-.sidebar__back-home-btn:hover {
+.sidebar__edit-profile-btn:hover {
+  background: #f3f3f3;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.sidebar__logout-btn {
+  border: none;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+  color: rgba(0, 0, 0, 0.6);
+  border: none;
+  width: fit-content;
+  background: none;
+}
+
+.sidebar__logout-btn:hover {
   background: #f3f3f3;
   color: rgba(0, 0, 0, 0.9);
 }

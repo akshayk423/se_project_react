@@ -1,5 +1,4 @@
 import "./PageNotFound.css";
-import Header from "../Header/Header";
 
 const PageNotFound = () => {
   return (

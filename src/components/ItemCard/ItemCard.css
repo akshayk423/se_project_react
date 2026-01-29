@@ -8,6 +8,22 @@
   cursor: pointer;
 }
 
+.card__header {
+  position: absolute;
+  background-color: white;
+  border-radius: 4px;
+  width: fit-content;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 1;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center it */
+}
+
 .card__image {
   max-width: 100%;
   height: auto;
@@ -27,10 +43,37 @@
   color: rgba(0, 0, 0, 0.6);
   position: relative;
   z-index: 1;
-  margin: 15px auto auto;
+  padding: 0px 5px;
   text-align: center;
   background-color: white;
   width: fit-content;
-  padding: 0px 5px;
   border-radius: 4px;
+  margin: 0;
+}
+
+.card__like-btn {
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+  border: none;
+  opacity: 40%;
+  transition: opacity 0.3s ease-in-out;
+  cursor: pointer;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/heart.svg");
+}
+
+.card__like-btn:hover {
+  opacity: 1;
+}
+
+.card__like-btn_liked {
+  background-image: url("../../assets/liked.svg");
+  opacity: 1;
+}
+
+.card__like-btn_liked:hover {
+  opacity: 0.5;
 }
